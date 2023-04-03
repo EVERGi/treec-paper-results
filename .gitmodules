@@ -1,0 +1,3 @@
+[submodule "boptest/project1-boptest-gym"]
+	path = boptest/project1-boptest-gym
+	url = git@github.com:ibpsa/project1-boptest-gym.git

@@ -1,0 +1,129 @@
+digraph BST {
+    node [fontname="Arial" style=filled colorscheme=paired12];
+    0 [ label = "dev_p_0:
+199.96" fillcolor=1];
+    1 [ label = "dev_p_4:
+0.00" fillcolor=5];
+    2 [ label = "dev_q_6:
+-36.01" fillcolor=2];
+    3 [ label = "dev_p_4:
+0.00" fillcolor=5];
+    4 [ label = "dev_q_5:
+-0.13" fillcolor=1];
+    5 [ label = "-50.00
+Visit count: 0" fillcolor=white];
+    6 [ label = "-23.44
+Visit count: 0" fillcolor=white];
+    7 [ label = "dev_p_0:
+30.83" fillcolor=1];
+    8 [ label = "13.64
+Visit count: 0" fillcolor=white];
+    9 [ label = "21.23
+Visit count: 0" fillcolor=white];
+    10 [ label = "dev_p_0:
+-79.84" fillcolor=1];
+    11 [ label = "dev_q_0:
+-141.77" fillcolor=8];
+    12 [ label = "-6.12
+Visit count: 0" fillcolor=white];
+    13 [ label = "-25.06
+Visit count: 0" fillcolor=white];
+    14 [ label = "dev_p_2:
+12.80" fillcolor=3];
+    15 [ label = "-50.00
+Visit count: 0" fillcolor=white];
+    16 [ label = "2.22
+Visit count: 0" fillcolor=white];
+    17 [ label = "dev_p_6:
+-42.32" fillcolor=7];
+    18 [ label = "dev_q_5:
+-4.13" fillcolor=1];
+    19 [ label = "dev_p_4:
+24.21" fillcolor=5];
+    20 [ label = "49.99
+Visit count: 0" fillcolor=white];
+    21 [ label = "9.87
+Visit count: 0" fillcolor=white];
+    22 [ label = "-44.07
+Visit count: 0" fillcolor=white];
+    23 [ label = "des_soc_6:
+0.00" fillcolor=3];
+    24 [ label = "-22.99
+Visit count: 0" fillcolor=white];
+    25 [ label = "34.18
+Visit count: 200" fillcolor=white];
+    26 [ label = "dev_p_6:
+30.83" fillcolor=7];
+    27 [ label = "dev_q_6:
+16.33" fillcolor=2];
+    28 [ label = "dev_p_2:
+14.10" fillcolor=3];
+    29 [ label = "-10.59
+Visit count: 0" fillcolor=white];
+    30 [ label = "49.99
+Visit count: 0" fillcolor=white];
+    31 [ label = "dev_p_3:
+-30.00" fillcolor=4];
+    32 [ label = "49.99
+Visit count: 0" fillcolor=white];
+    33 [ label = "-38.30
+Visit count: 0" fillcolor=white];
+    34 [ label = "dev_p_2:
+30.00" fillcolor=3];
+    35 [ label = "dev_q_0:
+12.76" fillcolor=8];
+    36 [ label = "-46.36
+Visit count: 0" fillcolor=white];
+    37 [ label = "31.73
+Visit count: 0" fillcolor=white];
+    38 [ label = "dev_p_5:
+-30.00" fillcolor=6];
+    39 [ label = "-50.00
+Visit count: 0" fillcolor=white];
+    40 [ label = "-32.40
+Visit count: 0" fillcolor=white];
+
+    0  -> 1[ label = "<"];
+    0  -> 26[ label = ">="];
+    1  -> 2[ label = "<"];
+    1  -> 17[ label = ">="];
+    2  -> 3[ label = "<"];
+    2  -> 10[ label = ">="];
+    3  -> 4[ label = "<"];
+    3  -> 7[ label = ">="];
+    4  -> 5[ label = "<"];
+    4  -> 6[ label = ">="];
+    7  -> 8[ label = "<"];
+    7  -> 9[ label = ">="];
+    10  -> 11[ label = "<"];
+    10  -> 14[ label = ">="];
+    11  -> 12[ label = "<"];
+    11  -> 13[ label = ">="];
+    14  -> 15[ label = "<"];
+    14  -> 16[ label = ">="];
+    17  -> 18[ label = "<"];
+    17  -> 23[ label = ">="];
+    18  -> 19[ label = "<"];
+    18  -> 22[ label = ">="];
+    19  -> 20[ label = "<"];
+    19  -> 21[ label = ">="];
+    23  -> 24[ label = "<"];
+    23  -> 25[ label = ">="];
+    26  -> 27[ label = "<"];
+    26  -> 34[ label = ">="];
+    27  -> 28[ label = "<"];
+    27  -> 31[ label = ">="];
+    28  -> 29[ label = "<"];
+    28  -> 30[ label = ">="];
+    31  -> 32[ label = "<"];
+    31  -> 33[ label = ">="];
+    34  -> 35[ label = "<"];
+    34  -> 38[ label = ">="];
+    35  -> 36[ label = "<"];
+    35  -> 37[ label = ">="];
+    38  -> 39[ label = "<"];
+    38  -> 40[ label = ">="];
+
+    labelloc="t";
+    label="Action_4";
+}
