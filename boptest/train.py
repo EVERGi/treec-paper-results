@@ -8,7 +8,8 @@ from boptest.input_function import observation_to_input_function
 from boptest.logger import BopLogger
 
 # TODO figure out how this works
-# from boptest.project1_boptest_gym.boptestGymEnv import BoptestGymEnv
+
+
 import requests
 from collections import OrderedDict
 
@@ -21,12 +22,14 @@ from deap import algorithms
 import numpy as np
 import random
 import os
-
-import gym
+import sys
 
 from treec.visualise_tree import display_binarytree
 
-import matplotlib.pyplot as plt
+bop_gym_path = os.path.dirname(os.path.realpath(__file__))+"/project1-boptest-gym/"
+sys.path.insert(0, bop_gym_path)
+
+from boptestGymEnv import BoptestGymEnv
 
 
 class BoptestGymEnvCustomReward(BoptestGymEnv):
@@ -525,6 +528,41 @@ def train_valid_function(port, electricity_price, time_period, num_gen):
     folder_name = boptest_tree_train(common_params, algo_params)
     print(folder_name)
     boptest_tree_validate(common_params, algo_params, folder_name)
+
+def train_function_boptest(port, electricity_price, time_period, num_gen):
+    if time_period == "peak_heat_day":
+        start_time_train = 1 * 24 * 3600
+        start_time_valid = 16 * 24 * 3600
+    else:
+        start_time_train = (115 - 7 - 15) * 24 * 3600
+        start_time_valid = (115 - 7) * 24 * 3600
+    tot_steps_train = 14 * 24 * 4
+    tot_steps_valid = 14 * 24 * 4
+
+    common_params = {
+        "input_func": observation_to_input_function,
+        "tot_steps_train": tot_steps_train,
+        "continuous": True,
+        "case": "E",
+        "tot_steps_valid": tot_steps_valid,
+        "start_time_train": start_time_train,
+        "start_time_valid": start_time_valid,
+        "electricity_price": electricity_price,
+        "time_period": time_period,
+        # "train_time": 30 * 60,
+        # "num_processes": num_proc,
+        "log_folder": "boptest_results/",
+        "port": port,
+    }
+    dimensions = 3 * 20 + 1
+    algo_params = {
+        "gen": num_gen,
+        "fixed": True,
+        "dimension": dimensions,
+        "checkpoint": None,
+    }
+    folder_name = boptest_tree_train(common_params, algo_params)
+    return folder_name
 
 
 if __name__ == "__main__":

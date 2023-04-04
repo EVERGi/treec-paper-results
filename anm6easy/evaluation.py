@@ -3,7 +3,7 @@ from treec.norm_func import (
     normalise_input,
 )
 
-from anm_tree.input_function import observation_to_input_function
+from .input_function import observation_to_input_function
 
 import numpy as np
 

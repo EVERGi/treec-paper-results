@@ -1,5 +1,5 @@
-from anm_tree.input_function import observation_to_input_function
-from anm_tree.train import anm_tree_train, anm_tree_validate
+from .input_function import observation_to_input_function
+from .train import anm_tree_train, anm_tree_validate
 import multiprocessing
 
 

@@ -152,6 +152,30 @@ def prune_individual(individual, params_prune, display=False):
 
     return trees_pruned
 
+def train_function_anm6easy(seed, train_gen):
+    common_params = {
+        "input_func": observation_to_input_function,
+        "tot_steps_train": 300,
+        "continuous": True,
+        "gym_env": "ANM6Easy-v0",
+        "tot_steps_valid": 3000,
+        "seed_train": seed,
+        "seed_valid": 100,
+        # "train_time": 30 * 60,
+        # "num_processes": num_proc,
+        "log_folder": "anm6easy_results/",
+    }
+    dimensions = (3 * 20 + 1) * 6
+    algo_type = "tree"
+    algo_params = {
+        "gen": train_gen,
+        "fixed": True,
+        "dimension": dimensions,
+    }
+
+    folder_name = anm_tree_train(common_params, algo_params)
+    return folder_name
+
 
 if __name__ == "__main__":
     common_params = {
@@ -164,7 +188,7 @@ if __name__ == "__main__":
         "seed_valid": 100,
         # "train_time": 30 * 60,
         # "num_processes": num_proc,
-        "log_folder": "ANM6Easy/",
+        "log_folder": "anm6easy_results/",
     }
     num_gen = 1500
     dimensions = (3 * 20 + 1) * 6
