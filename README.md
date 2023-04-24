@@ -21,5 +21,4 @@ make run TESTCASE=bestest_hydronic_heat_pump PORT=5000
 
 ## Example
 
-Use the treec_results.py command line tool to reproduce the results, a description of all the options of the tool is descriped in the --help menu of the tool
-
+Use the treec_results.py command line tool to reproduce the results, a description of all the options of the tool is available in the --help menu of the tool
