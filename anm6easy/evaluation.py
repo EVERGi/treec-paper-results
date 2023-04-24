@@ -4,11 +4,12 @@ from treec.norm_func import (
 )
 
 from .input_function import observation_to_input_function
+import time
 
 import numpy as np
 
 
-def evaluate_trees(trees, params_evaluation, individual=None):
+def evaluate_trees(trees, params_evaluation, individual=None, render = False):
     env = params_evaluation["env"]
     tot_steps = params_evaluation["tot_steps"]
     logger = params_evaluation["logger"]
@@ -49,6 +50,9 @@ def evaluate_trees(trees, params_evaluation, individual=None):
         obs, r, _, _ = env.step(np.array(actions))
         score += env.gamma**t * r
         tot_reward += r
+        if render:
+            env.render()
+            time.sleep(0.5)
 
     if logger is not None:
         new_best_tree = logger.episode_eval_log(individual, score)

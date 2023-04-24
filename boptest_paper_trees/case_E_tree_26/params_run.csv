@@ -1,0 +1,20 @@
+tree
+
+common params:
+input_func,observation_to_input_function
+tot_steps_train,1344
+continuous,True
+case,E
+tot_steps_valid,1344
+start_time_train,8035200
+start_time_valid,9331200
+electricity_price,constant
+time_period,typical_heat_day
+log_folder,boptest_results/
+port,6431
+
+algo params:
+gen,150
+fixed,True
+dimension,61
+checkpoint,None

@@ -1,0 +1,16 @@
+tree
+
+common params:
+input_func,observation_to_input_function
+tot_steps_train,300
+continuous,True
+gym_env,ANM6Easy-v0
+tot_steps_valid,3000
+log_folder,paper_ANM6_compare/
+seed_train,105
+seed_valid,0
+
+algo params:
+gen,1500
+fixed,True
+dimension,366

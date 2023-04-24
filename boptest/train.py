@@ -323,6 +323,7 @@ def get_env_bop(
     render=False,
     scenario={"electricity_price": "highly_dynamic"},
     port="5000",
+    tot_time_steps=100*24*12
 ):
 
     url = f"http://127.0.0.1:{port}"
@@ -459,6 +460,7 @@ def get_env_bop(
             log_dir=log_dir,
         )
     if case == "E":
+        max_episode_length = tot_time_steps*900
         env = BoptestGymEnvCustomReward(
             url=url,
             actions=["oveHeaPumY_u"],
@@ -475,7 +477,7 @@ def get_env_bop(
                 ]
             ),
             # predictive_period=24 * 3600,
-            predictive_period=0,
+            predictive_period= 0,
             # regressive_period=6 * 3600,
             regressive_period=None,
             scenario=scenario,

@@ -1,8 +1,8 @@
 from treec.prune_tree import prune_tree
 from treec.train import find_best_individual, get_treestruct
-from evaluation import evaluate, evaluate_trees, evaluate_with_leafs
-from input_function import observation_to_input_function
-from logger import AnmLogger
+from .evaluation import evaluate, evaluate_trees, evaluate_with_leafs
+from .input_function import observation_to_input_function
+from .logger import AnmLogger
 
 from deap import base
 from deap import creator

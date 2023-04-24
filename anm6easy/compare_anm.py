@@ -2,8 +2,9 @@ import gym
 import time
 from gym_anm import MPCAgentPerfect, MPCAgentConstant
 import numpy as np
-from .input_function import observation_to_input_function
-from .train import prune_individual
+
+from anm6easy.input_function import observation_to_input_function
+from anm6easy.train import prune_individual
 from treec.norm_func import denormalise_input, normalise_input
 from treec.train import find_best_individual
 from treec.tree import BinaryTreeFixedCont
@@ -169,7 +170,7 @@ def run_tree(tree_folder):
 
 if __name__ == "__main__":
 
-    tot_time = 0
+    """tot_time = 0
     tot_rew = 0
     for i in range(100):
         t, rew = run(i)
@@ -177,8 +178,8 @@ if __name__ == "__main__":
         tot_rew += rew / 100
 
     print(tot_time)
-    print(tot_rew)
-    # folder = "paper_ANM6_compare/ANM6Easy-v0_tree_3/"
+    print(tot_rew)"""
+    folder = "/home/django/Documents/Thesis_MOBI/Decision_tree_paper/ANM6_results/trees/ANM6Easy-v0_tree_97/"
 
     # run_tree(folder)
 
