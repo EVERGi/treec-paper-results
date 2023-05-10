@@ -5,10 +5,12 @@ from boptest.validate import csv_to_dict
 from treec.train import get_treestruct
 
 import warnings
-warnings.filterwarnings("ignore", category=UserWarning) 
+
+warnings.filterwarnings("ignore", category=UserWarning)
 
 
 import matplotlib.pyplot as plt
+
 
 def prune_tree(params_path, model_path):
     parameters = csv_to_dict(params_path)
@@ -23,7 +25,7 @@ def prune_tree(params_path, model_path):
         start_time_train = (115 - 7 - 15) * 24 * 3600
         start_time_valid = (115 - 7) * 24 * 3600
     tot_steps_train = 14 * 24 * 4
-    #TODO change ste train
+    # TODO change ste train
     # tot_steps_train = 2 * 4
     tot_steps_valid = 14 * 24 * 4
 
@@ -71,7 +73,7 @@ def prune_tree(params_path, model_path):
         render=False,
         scenario={"electricity_price": electricity_price},
         port=port,
-        tot_time_steps=tot_steps_train
+        tot_time_steps=tot_steps_train,
     )
 
     params_prune = {
@@ -92,16 +94,19 @@ def prune_tree(params_path, model_path):
 
     return trees, common_params, params_prune
 
+
 def visualise_trees_bop(params_path, model_path, time_period, electricity_price):
+    print("Pruning run progress")
     trees, common_params, params_prune = prune_tree(params_path, model_path)
-    
+    print("Pruning ended\n")
+
     case = common_params["case"]
-    
+
     if time_period == "peak_heat_day":
         start_time_valid = 16 * 24 * 3600
     else:
         start_time_valid = (115 - 7) * 24 * 3600
-    
+
     TreeStruct = params_prune["TreeStruct"]
     input_func = params_prune["input_func"]
     tot_steps_valid = common_params["tot_steps_valid"]
@@ -114,7 +119,7 @@ def visualise_trees_bop(params_path, model_path, time_period, electricity_price)
             "electricity_price": electricity_price,
             "time_period": time_period,
         },
-        tot_time_steps=tot_steps_valid
+        tot_time_steps=tot_steps_valid,
     )
 
     params_valid = {
@@ -125,7 +130,9 @@ def visualise_trees_bop(params_path, model_path, time_period, electricity_price)
         "logger": None,
     }
 
-    result, _ = evaluate_trees(trees, params_valid)
+    print("Validation and visualisation run progress")
+    result, _ = evaluate_trees(trees, params_valid, show_progress=True)
+
     env.render()
 
     total_discomfort = env.last_kpis["tdis_tot"]
@@ -133,7 +140,12 @@ def visualise_trees_bop(params_path, model_path, time_period, electricity_price)
     print(f"Total discomfort: {total_discomfort}")
     print(f"Total operational cost: {total_cost}")
     plt.show(block=True)
-    
+
 
 if __name__ == "__main__":
-    visualise_trees_bop("boptest_paper_trees/case_E_tree_0/params_run.csv", "boptest_paper_trees/case_E_tree_0/tree_model.txt", "peak_heat_day", "dynamic")
+    visualise_trees_bop(
+        "boptest_paper_trees/case_E_tree_0/params_run.csv",
+        "boptest_paper_trees/case_E_tree_0/tree_model.txt",
+        "peak_heat_day",
+        "dynamic",
+    )

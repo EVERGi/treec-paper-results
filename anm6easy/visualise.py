@@ -6,15 +6,17 @@ from treec.train import get_treestruct
 import gym
 
 import warnings
-warnings.filterwarnings("ignore", category=DeprecationWarning) 
-warnings.filterwarnings("ignore", category=UserWarning) 
+
+warnings.filterwarnings("ignore", category=DeprecationWarning)
+warnings.filterwarnings("ignore", category=UserWarning)
+
 
 def csv_to_dict(filepath):
-
     with open(filepath, "r") as csvfile:
         csvreader = csv.reader(csvfile)
         mydict = {rows[0]: rows[1] for rows in csvreader if len(rows) == 2}
     return mydict
+
 
 def prune_tree(params_path, model_path):
     parameters = csv_to_dict(params_path)
@@ -47,20 +49,18 @@ def prune_tree(params_path, model_path):
 
     return trees
 
-def visualise_trees_anm(params_path, model_path, seed_valid):
 
-    print("Start pruning")
+def visualise_trees_anm(params_path, model_path, seed_valid):
+    print("Pruning run progress")
     trees = prune_tree(params_path, model_path)
-    print("Pruning eneded")
+    print("Pruning ended\n")
 
     parameters = csv_to_dict(params_path)
     tot_steps_valid = int(parameters["tot_steps_valid"])
     gym_env = parameters["gym_env"]
 
-
-
     TreeStruct = get_treestruct(parameters, parameters)
-    
+
     env = gym.make(gym_env)
 
     params_valid = {
@@ -71,8 +71,8 @@ def visualise_trees_anm(params_path, model_path, seed_valid):
         "env": env,
         "logger": None,
     }
-    print("Start validation")
-    result, _ = evaluate_trees(trees, params_valid)
+    print("Validation and visualisation run progress")
+    result, _ = evaluate_trees(trees, params_valid, show_progress=True)
     print("Validation score: ", result)
 
     env = gym.make(gym_env)
@@ -87,6 +87,7 @@ def visualise_trees_anm(params_path, model_path, seed_valid):
     }
 
     result, _ = evaluate_trees(trees, params_valid, render=True)
+
 
 if __name__ == "__main__":
     params_path = "anm6easy_paper_trees/ANM6Easy-v0_tree_0/params_run.csv"

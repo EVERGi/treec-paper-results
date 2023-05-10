@@ -14,9 +14,10 @@ import numpy as np
 import math
 
 from matplotlib import pyplot as plt
+from tqdm import tqdm
 
 
-def evaluate_trees(trees, params_evaluation, individual=None):
+def evaluate_trees(trees, params_evaluation, individual=None, show_progress=False):
     env = params_evaluation["env"]
     tot_steps = params_evaluation["tot_steps"]
     logger = params_evaluation["logger"]
@@ -31,7 +32,8 @@ def evaluate_trees(trees, params_evaluation, individual=None):
     obs_high = [i[1][1] for i in input_info]
 
     tot_reward = 0
-    for t in range(tot_steps):
+
+    for t in tqdm(range(tot_steps)) if show_progress else range(tot_steps):
         actions = list()
 
         norm_obs = np.array(
@@ -76,7 +78,7 @@ def evaluate_trees(trees, params_evaluation, individual=None):
     return tot_reward, all_nodes_visited
 
 
-def evaluate_with_leafs(individual, params_evaluation):
+def evaluate_with_leafs(individual, params_evaluation, show_progress=False):
     env = params_evaluation["env"]
 
     TreeStruct = params_evaluation["TreeStruct"]
@@ -105,7 +107,9 @@ def evaluate_with_leafs(individual, params_evaluation):
 
         trees.append(tree)
 
-    result, all_nodes_visited = evaluate_trees(trees, params_evaluation, individual)
+    result, all_nodes_visited = evaluate_trees(
+        trees, params_evaluation, individual, show_progress
+    )
 
     return result, all_nodes_visited
 

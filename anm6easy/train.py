@@ -70,7 +70,6 @@ def anm_tree_train(common_params, algo_params, queue=None):
 
 
 def anm_tree_validate(common_params, algo_params, folder_name, seed_valid=None):
-
     input_func = common_params["input_func"]
     tot_steps_train = common_params["tot_steps_train"]
     tot_steps_valid = common_params["tot_steps_valid"]
@@ -119,7 +118,6 @@ def anm_tree_validate(common_params, algo_params, folder_name, seed_valid=None):
 
 
 def prune_individual(individual, params_prune, display=False):
-
     input_func = params_prune["input_func"]
     TreeStruct = params_prune["TreeStruct"]
     env = params_prune["env"]
@@ -138,7 +136,7 @@ def prune_individual(individual, params_prune, display=False):
     trees_pruned = list()
 
     _, feature_names = input_func(env, [0] * env.observation_space.shape[0])
-    _, leafs = evaluate_with_leafs(individual, params_prune)
+    _, leafs = evaluate_with_leafs(individual, params_prune, show_progress=True)
     for i, tree_raw in enumerate(trees):
         tree = TreeStruct(tree_raw, feature_names, [])
         tree.set_act_min_max(env.action_space.low[i], env.action_space.high[i])
@@ -151,6 +149,7 @@ def prune_individual(individual, params_prune, display=False):
             display_binarytree(tree, "Action_" + str(i), leafs_tree)
 
     return trees_pruned
+
 
 def train_function_anm6easy(seed, train_gen):
     common_params = {

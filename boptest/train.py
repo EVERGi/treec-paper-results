@@ -26,7 +26,7 @@ import sys
 
 from treec.visualise_tree import display_binarytree
 
-bop_gym_path = os.path.dirname(os.path.realpath(__file__))+"/project1-boptest-gym/"
+bop_gym_path = os.path.dirname(os.path.realpath(__file__)) + "/project1-boptest-gym/"
 sys.path.insert(0, bop_gym_path)
 
 from boptestGymEnv import BoptestGymEnv
@@ -280,7 +280,6 @@ def boptest_tree_validate(
 
 
 def prune_individual(individual, params_prune, display=False):
-
     input_func = params_prune["input_func"]
     TreeStruct = params_prune["TreeStruct"]
     env = params_prune["env"]
@@ -299,7 +298,7 @@ def prune_individual(individual, params_prune, display=False):
     trees_pruned = list()
 
     _, feature_names = input_func(env, [0] * env.observation_space.shape[0])
-    _, leafs = evaluate_with_leafs(individual, params_prune)
+    _, leafs = evaluate_with_leafs(individual, params_prune, show_progress=True)
     for i, tree_raw in enumerate(trees):
         tree = TreeStruct(tree_raw, feature_names, [])
         tree.set_act_min_max(env.action_space.low[i], env.action_space.high[i])
@@ -323,9 +322,8 @@ def get_env_bop(
     render=False,
     scenario={"electricity_price": "highly_dynamic"},
     port="5000",
-    tot_time_steps=100*24*12
+    tot_time_steps=100 * 24 * 12,
 ):
-
     url = f"http://127.0.0.1:{port}"
 
     start_time_tests = [(23 - 7) * 24 * 3600, (115 - 7) * 24 * 3600]
@@ -460,7 +458,7 @@ def get_env_bop(
             log_dir=log_dir,
         )
     if case == "E":
-        max_episode_length = tot_time_steps*900
+        max_episode_length = tot_time_steps * 900
         env = BoptestGymEnvCustomReward(
             url=url,
             actions=["oveHeaPumY_u"],
@@ -477,7 +475,7 @@ def get_env_bop(
                 ]
             ),
             # predictive_period=24 * 3600,
-            predictive_period= 0,
+            predictive_period=0,
             # regressive_period=6 * 3600,
             regressive_period=None,
             scenario=scenario,
@@ -531,6 +529,7 @@ def train_valid_function(port, electricity_price, time_period, num_gen):
     print(folder_name)
     boptest_tree_validate(common_params, algo_params, folder_name)
 
+
 def train_function_boptest(port, electricity_price, time_period, num_gen):
     if time_period == "peak_heat_day":
         start_time_train = 1 * 24 * 3600
@@ -568,5 +567,4 @@ def train_function_boptest(port, electricity_price, time_period, num_gen):
 
 
 if __name__ == "__main__":
-
     train_valid_function("5000", "highly_dynamic", "peak_heat_day", 150)
