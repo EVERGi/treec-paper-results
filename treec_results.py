@@ -89,6 +89,19 @@ def bop_scenarios(scenario):
     return time_period, electricity_price
 
 
+def get_best_model(folder_path):
+    model_dir = folder_path + "/models/"
+    best_score = None
+    for file in os.listdir(model_dir):
+        num_score_str = file.replace(".txt", "").replace("model_", "")
+        start_score = num_score_str.find("_") + 1
+        score = float(num_score_str[start_score:])
+        if best_score is None or score > best_score:
+            best_score = score
+            best_model = model_dir + file
+    return best_model
+
+
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(
         description="Execute the trainings of TreeC or visualise the trees obtained for the results in the paper.",
@@ -154,6 +167,8 @@ python treec_results.py -c bop -m visu -s 0 -p boptest_paper_trees/case_E_tree_1
         print("Training finnished.")
         print("Results in:")
         print(folder_path)
+        print("Best tree model:")
+        print(get_best_model(folder_path))
     elif args.mode == "visu":
         if args.case == "anm":
             anm6easy_visu(args.scenario, args.path_tree)
