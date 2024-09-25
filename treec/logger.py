@@ -91,7 +91,7 @@ class GeneralLogger:
         text_file.write(params_str)
         text_file.close()
 
-    def episode_eval_log(self, microgrid, model, eval_score):
+    def episode_eval_log(self, model, eval_score):
         episode_count, _ = self.read_best_score_episode_count()
         self.update_episode_count()
 
@@ -109,8 +109,6 @@ class GeneralLogger:
 
         better_score = self.update_best_score(eval_score)
         if better_score:
-            self.log_microgrid_info(microgrid, eval_exten)
-
             self.save_model(model, eval_exten)
             return eval_exten
 
@@ -153,7 +151,6 @@ class GeneralLogger:
             return False
 
         if best_score == "" or float(best_score) < new_best_score:
-
             file_content[1] = f"score,{new_best_score}"
 
             file = open(self.episode_score_file, "w+")
@@ -186,8 +183,6 @@ class GeneralLogger:
         return episode_count, best_score
 
 
-
-
 class TreeLogger(GeneralLogger):
     def __init__(self, save_dir, algo_type, common_params, algo_params):
         super().__init__(save_dir, algo_type, common_params, algo_params)
@@ -205,20 +200,11 @@ class TreeLogger(GeneralLogger):
 
             file.close()
 
-    def save_tree_dot(self, trees_batt, trees_charg, all_nodes_visited, eval_exten):
-
-        for i, tree_batt in enumerate(trees_batt):
+    def save_tree_dot(self, trees, all_nodes_visited, eval_exten):
+        for i, tree in enumerate(trees):
             leafs_batt = [j[i] for j in all_nodes_visited[0]]
-            title = "Battery_" + str(i)
-            dot_str = binarytree_to_dot(tree_batt, title, leafs_batt)
-            file = open(self.dot_files_dir + eval_exten + "_" + title + ".dot", "w+")
-            file.write(dot_str)
-            file.close()
-
-        for i, tree_charg in enumerate(trees_charg):
-            leafs_charg = [j[i] for j in all_nodes_visited[1]]
-            title = "Charger_" + str(i)
-            dot_str = binarytree_to_dot(tree_charg, title, leafs_charg)
+            title = "Tree_" + str(i)
+            dot_str = binarytree_to_dot(tree, title, leafs_batt)
             file = open(self.dot_files_dir + eval_exten + "_" + title + ".dot", "w+")
             file.write(dot_str)
             file.close()
