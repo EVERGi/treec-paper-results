@@ -34,14 +34,15 @@ choco install make
 ```
 For Docker install it through the official executable on their website [https://www.docker.com/](https://www.docker.com/) and restart your computer:
 
-In case it did not work, refer to the boptest v0.1.0 github repository page for further indication [https://github.com/ibpsa/project1-boptest/tree/v0.1.0?tab=readme-ov-file](https://github.com/ibpsa/project1-boptest/tree/v0.1.0?tab=readme-ov-file) 
+In case it did not work, refer to the BOPTEST v0.1.0 github repository page for further indication [https://github.com/ibpsa/project1-boptest/tree/v0.1.0?tab=readme-ov-file](https://github.com/ibpsa/project1-boptest/tree/v0.1.0?tab=readme-ov-file) 
 
-Once make and docker are installed you can build and run the boptest simulator with:
+Once make and docker are installed you can build and run the BOPTEST simulator with:
 ```
 cd boptest/project1-boptest
 make build TESTCASE=bestest_hydronic_heat_pump PORT=5000
 make run TESTCASE=bestest_hydronic_heat_pump PORT=5000
 ```
+The BOPTEST simulator needs to run in the background for the training and visualisation of the BOPTEST case.
 
 This installation guide has been tested successfully on Windows with conda version 4.9.2, python version 3.11.9, make version 4.4.1 and docker version 27.3.1.
 
@@ -49,7 +50,7 @@ This installation guide has been tested successfully on Windows with conda versi
 
 Use the treec_results.py command line tool to reproduce the results, a description of all the options of the tool is available in the --help menu of the tool.
 
-Here below are examples of commands to reproduce paper visualisations and trainings.
+Here below are examples of commands to reproduce paper visualisations and trainings. Execute these commands from the root directory of the github repository.
 
 Visualise simulation of the best performing tree displayed in the paper's Figure 4 for ANM6easy case:
 ```
@@ -82,7 +83,7 @@ Now evaluate these EMSs using the validation score printed through the following
 python treec_results.py -c anm -m visu -s 0 -p PATH_TO_BEST_TREE_MODEL
 ```
 Execute this command for seeds from 0 to 10 and average the printed validation scores for each of the 20 EMSs. This will give you comparable scores to the ones presented in the paper.
-### Boptest case
+### BOPTEST case
 Run the following command 5 times:
 ```
 python treec_results.py -c bop -m train -s 0 -t 150
