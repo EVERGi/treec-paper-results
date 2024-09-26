@@ -45,13 +45,13 @@ make run TESTCASE=bestest_hydronic_heat_pump PORT=5000
 
 This installation guide has been tested successfully on Windows with conda version 4.9.2, python version 3.11.9, make version 4.4.1 and docker version 27.3.1.
 
-## Results reproduction and visualisation
+## Training reproduction and visualisation
 
 Use the treec_results.py command line tool to reproduce the results, a description of all the options of the tool is available in the --help menu of the tool.
 
 Here below are examples of commands to reproduce paper visualisations and trainings.
 
-Visualise simulation of tree displayed in the paper's Figure 4 for ANM6easy case:
+Visualise simulation of the best performing tree displayed in the paper's Figure 4 for ANM6easy case:
 ```
 python treec_results.py -c anm -m visu -s 0 -p anm6easy_paper_trees/ANM6Easy-v0_tree_39/tree_model.txt
 ```
@@ -67,3 +67,30 @@ Run one training for BOPTEST case for peak_heat_day and constant price (scenario
 ```
 python treec_results.py -c bop -m train -s 0 -t 150
 ```
+
+## Reproduce results
+Many of these instructions can be done in parallel. How to do this in parallel is often specific to the computer on which the training is ran.
+### ANM6Easy case
+Run the following command 5 times:
+```
+python treec_results.py -c anm -m train -s 100 -t 1500
+```
+Then select the tree model with the lowest score and you will get the EMS for seed 100 (value after ``-s`` in command). Do the same process for seeds 100 to 119 to obtain 20 different EMSs as was done in the original paper.
+
+Now evaluate these EMSs using the validation score printed through the following command (replace ``PATH_TO_BEST_TREE_MODEL`` with the path to tree model of the generated EMS):
+```
+python treec_results.py -c anm -m visu -s 0 -p PATH_TO_BEST_TREE_MODEL
+```
+Execute this command for seeds from 0 to 10 and average the printed validation scores. This will give you a comparable score to the ones presented in the paper.
+### Boptest case
+Run the following command 5 times:
+```
+python treec_results.py -c bop -m train -s 0 -t 150
+```
+Then select the tree model with the lowest score and you will get the EMS for scenario 0 (value after ``-s`` in command). Scenario 0 corresponds to the peak_heat_day time period with constant electricity price. In the original paper two EMSs were generated for each of the 6 scenarios.
+
+Now evaluate these EMSs using the validation scores printed through the following command (replace ``SCENARIO_MODEL`` with the scenario number the EMS was trained on and ``PATH_TO_BEST_TREE_MODEL`` with the path to tree model of the generated EMS).
+```
+python treec_results.py -c bop -m visu -s SCENARIO_MODEL -p PATH_TO_BEST_TREE_MODEL
+```
+This will give you the total discomfort and total electricity cost comparable to the ones presented in the paper.
