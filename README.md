@@ -87,7 +87,7 @@ Run the following command 5 times:
 ```
 python treec_results.py -c bop -m train -s 0 -t 150
 ```
-Then select the tree model with the lowest score and you will get the EMS for scenario 0 (value after ``-s`` in command). Scenario 0 corresponds to the peak_heat_day time period with constant electricity price. In the original paper two EMSs were generated for each of the 6 scenarios.
+Then select the tree model with the lowest score and you will get the EMS for scenario 0 (value after ``-s`` in command). Scenario 0 corresponds to the peak_heat_day time period with constant electricity price. In the original paper two EMSs were generated through this process for each of the 6 scenarios.
 
 Now evaluate these EMSs using the validation scores printed through the following command (replace ``SCENARIO`` with the scenario number the EMS was trained on and ``PATH_TO_BEST_TREE_MODEL`` with the path to tree model of the generated EMS).
 ```
