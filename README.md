@@ -44,7 +44,9 @@ make run TESTCASE=bestest_hydronic_heat_pump PORT=5000
 ```
 The BOPTEST simulator needs to run in the background for the training and visualisation of the BOPTEST case.
 
-This installation guide has been tested successfully on Windows with conda version 4.9.2, python version 3.11.9, make version 4.4.1 and docker version 27.3.1.
+This installation guide has been tested successfully on Windows and Linux with conda version 4.9.2 for Windows and 24.1.2 for Linux, python version 3.11.9 for both, make version 4.4.1 for both and docker version 27.3.1 for Windows and 27.1.2 for Linux.
+
+If there are any issues with installation, please notify us by opening an issue or start a discussion in this repository. 
 
 ## Visualisation and training
 

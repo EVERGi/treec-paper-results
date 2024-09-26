@@ -138,7 +138,7 @@ def visualise_trees_bop(params_path, model_path, time_period, electricity_price)
     total_discomfort = env.last_kpis["tdis_tot"]
     total_cost = env.last_kpis["cost_tot"]
     print(f"Total discomfort: {total_discomfort}")
-    print(f"Total operational cost: {total_cost}")
+    print(f"Total electricity cost: {total_cost}")
     plt.show(block=True)
 
 
