@@ -81,7 +81,7 @@ Now evaluate these EMSs using the validation score printed through the following
 ```
 python treec_results.py -c anm -m visu -s 0 -p PATH_TO_BEST_TREE_MODEL
 ```
-Execute this command for seeds from 0 to 10 and average the printed validation scores. This will give you a comparable score to the ones presented in the paper.
+Execute this command for seeds from 0 to 10 and average the printed validation scores for each of the 20 EMSs. This will give you comparable scores to the ones presented in the paper.
 ### Boptest case
 Run the following command 5 times:
 ```
