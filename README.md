@@ -45,7 +45,7 @@ make run TESTCASE=bestest_hydronic_heat_pump PORT=5000
 
 This installation guide has been tested successfully on Windows with conda version 4.9.2, python version 3.11.9, make version 4.4.1 and docker version 27.3.1.
 
-## Training reproduction and visualisation
+## Visualisation and training
 
 Use the treec_results.py command line tool to reproduce the results, a description of all the options of the tool is available in the --help menu of the tool.
 
@@ -89,8 +89,8 @@ python treec_results.py -c bop -m train -s 0 -t 150
 ```
 Then select the tree model with the lowest score and you will get the EMS for scenario 0 (value after ``-s`` in command). Scenario 0 corresponds to the peak_heat_day time period with constant electricity price. In the original paper two EMSs were generated for each of the 6 scenarios.
 
-Now evaluate these EMSs using the validation scores printed through the following command (replace ``SCENARIO_MODEL`` with the scenario number the EMS was trained on and ``PATH_TO_BEST_TREE_MODEL`` with the path to tree model of the generated EMS).
+Now evaluate these EMSs using the validation scores printed through the following command (replace ``SCENARIO`` with the scenario number the EMS was trained on and ``PATH_TO_BEST_TREE_MODEL`` with the path to tree model of the generated EMS).
 ```
-python treec_results.py -c bop -m visu -s SCENARIO_MODEL -p PATH_TO_BEST_TREE_MODEL
+python treec_results.py -c bop -m visu -s SCENARIO -p PATH_TO_BEST_TREE_MODEL
 ```
 This will give you the total discomfort and total electricity cost comparable to the ones presented in the paper.
